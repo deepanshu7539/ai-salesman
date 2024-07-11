@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
-import logo from "../assests/AI salesman.svg";
-import logofull from "../assests/AI-salesman-logo.svg";
+import logo from '../assets/AI salesman.svg'
+import logofull from '../assets/AI-salesman-logo.svg'
 import {
   Bars3Icon,
   BellIcon,
@@ -16,15 +16,31 @@ import {
 
 import { Fragment } from "react";
 import ChatBox from "./ChatBox";
+import HomeWashBox from "./HomeWashBox";
+import ServiceScheduler from "./ServiceSchedulerBox";
+// import AdminBox from "./AdminBox";
+import Main from "./Main";
 import axios from "axios";
-
+import UserRegistration from "./AdminUpdate/auth/AdminRegistration";
+import AdminLogin from "./AdminUpdate/auth/AdminLogin";
+import Cart from "./Ecom/Cart";
+import Faq from "./AdminUpdate/Faq";
 import AdminBox from "./AdminBox";
+import Notifications from "./Notifications";
 
 const navigation = [
   { name: "Ai Salesman", href: "#", icon: UsersIcon, current: true },
   // { name: "Ecommerce", href: "#", icon: ShoppingCartIcon, current: false },
-  
+  // { name: "Simple Services", href: "#", icon: BellIcon, current: false },
+  // {
+  //     name: "Products",
+  //     href: "#",
+  //     icon: BellIcon,
+  //     current: false,
+  // },
+  // { name: "Complex Services", href: "#", icon: BellIcon, current: false },
 ];
+
 
 const teams = [
   { name: "Engineering", href: "#", initial: "E", current: true },
@@ -37,6 +53,8 @@ const userNavigation = [
   { name: "Sign out", href: "#" },
 ];
 
+
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -47,15 +65,14 @@ export default function Layout() {
   const [activeFormComponent, setActiveFormComponent] = useState("");
   const [messages, setMessages] = useState([]);
   const hasFetchedData = useRef(false);
-  const [navigationState, setNavigationState] = useState("Instant Quote");
+const [navigationState, setNavigationState]=useState("Instant Quote");
 
-  const [step, setStep] = useState(1);
-  // const [messages, setMessages] = useState([]);
-  
+const [step,setStep]=useState(1);
+// const [messages, setMessages] = useState([]);
 
-  const changeNavigationState = (newState) => {
-    setNavigationState(newState);
-  };
+const changeNavigationState=(newState)=> {
+  setNavigationState(newState);
+}
 
   let timeoutId;
 
@@ -74,24 +91,27 @@ export default function Layout() {
   const [renderKey, setRenderKey] = useState(0);
   const [resultView, setResultView] = useState("");
   const [isChatboxOpen, setIsChatboxOpen] = useState(true);
-  const [openSidebar, setOpenSidebar] = useState(true);
+  const [openSidebar, setOpenSidebar]=useState(true);
 
-  const toggleSidebar = () => {
+  const [showComp,setShowComp]=useState(false);
+
+   const toggleSidebar = () => {
     //  setIsChatboxOpen(isOpen);
     setOpenSidebar(!openSidebar);
     console.log("clicked");
-  };
+
+   };
 
   const callResult = async (component) => {
     try {
       console.log("Line 77 of Layout.jsx. CALLING API NOW");
       console.log(
         "https://instantquotedemo.automationagencyindia.com/api/result/" +
-          component
+        component
       );
       const response1 = await axios.get(
         "https://instantquotedemo.automationagencyindia.com/api/result/" +
-          component
+        component
         // {
         //     component: component,
         // }
@@ -124,12 +144,7 @@ export default function Layout() {
             throw new Error("Failed to fetch data");
           }
           setChatData(response.data);
-          setMessages([
-            {
-              text: "Welcome to AI-Salesman. Let's set up your account to help you manage and optimise your sales process",
-              sender: "system",
-            },
-          ]);
+          setMessages([{ text: "Welcome to AI-Salesman. Let's set up your account to help you manage and optimise your sales process", sender: "system" }]);
           hasFetchedData.current = true;
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -137,9 +152,11 @@ export default function Layout() {
       };
 
       fetchData();
+
     }
 
-    console.log(navigationState);
+  console.log(navigationState);
+
 
     // console.log("called");
   }, [navigationState]);
@@ -718,8 +735,8 @@ export default function Layout() {
           </div>
 
           <main className="relative h-[90vh]">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-              <div className="rounded-b-[45px] drop-shadow-lg md:rounded-lg overflow-hidden">
+            <div className={`${showComp?"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2":"mx-auto max-w-xl"}`}>
+              <div className="rounded-b-[45px] drop-shadow-md md:rounded-lg overflow-hidden ">
                 {chatData && (
                   <ChatBox
                     chatData={chatData}
@@ -729,24 +746,45 @@ export default function Layout() {
                     setStep={setStep}
                   />
                 )}
-                
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-1">
+              <div className={`${showComp?"grid grid-cols-1 lg:grid-cols-1":"hidden"}`}>
                 <div className="drop-shadow-lg p-4 md:p-0 rounded-xl md:pl-2 overflow-hidden ">
-            
-                  <AdminBox
-                    setMessages={setMessages}
-                    step={step}
-                    setStep={setStep}
-                  />
+                  {/* 
+          {navigationState==="Ecommerce"&&<EcomBanner />}
+          {navigationState==="Instant Quote"&&<Main chatData={chatData} callResult={callResult} renderKey={renderKey}/>} 
+        */}
+                  <AdminBox setMessages={setMessages} step={step} setStep={setStep} />
                 </div>
-  
+                {/* 
+        <ChatBox
+          chatData={chatData}
+          messages={messages}
+          setMessages={setMessages}
+        /> 
+      */}
               </div>
             </div>
 
+            {/* <div className="absolute bottom-0 right-0 p-4 m-2">
+              <svg
+                className="animate-bounce w-6 h-6 rounded-full"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="black"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
+                />
+              </svg>
+            </div> */}
           </main>
         </div>
       </div>
     </>
   );
 }
+
