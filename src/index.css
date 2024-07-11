@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::selection {
+  background-color: #eaeaf5;
+  /* Custom background color */
+  color: #7b5aff;
+}
+
+::-moz-selection {
+  background-color: #eaeaf5;
+  /* Custom background color */
+  color: #7b5aff;
+  /* Custom text color */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
