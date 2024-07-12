@@ -29,10 +29,10 @@ function Notification({ message, type, duration = 5000 }) {
 
   return (
     <div
-      className={`bg-gray-50 p-8 right-0 fixed top-4 z-50 ${shadowClasses[type]}`}
+      className={`bg-gray-50 rounded-lg py-8 pr-8 pl-6 right-0 fixed top-12 z-50 ${shadowClasses[type]}`}
     >
       <div className="flex items-center justify-between">
-        <h3 className="text-xl text-center font-bold font-serif border-b">
+        <h3 className="text-xl text-center font-bold font-serif border-b text-black">
           Notifications
         </h3>
       </div>
