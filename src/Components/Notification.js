@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 
-function Notification({ message, type, duration = 5000 }) {
-  const [visible, setVisible] = useState(true);
+function Notification({ message, type, duration = 3000 }) {
+  const [visible, setVisible] = useState(false); // Start with visibility set to false
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setVisible(false);
-    }, duration);
-
-    return () => clearTimeout(timer);
-  }, [duration]);
+    // Check if there's a message to show
+    if (message) {
+      setVisible(true); // Show the notification
+      const timer = setTimeout(() => {
+        setVisible(false); // Hide the notification after duration
+      }, duration);
+      return () => clearTimeout(timer); // Cleanup timer on unmount or change
+    }
+  }, [message, duration]);
 
   if (!visible) return null;
 
