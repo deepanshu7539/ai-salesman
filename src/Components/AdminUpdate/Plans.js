@@ -10,56 +10,49 @@ const pricing = {
   ],
   tiers: [
     {
-      name: "Hobby",
-      id: "tier-hobby",
+      name: "Basic",
+      id: 1,
       href: "#",
       price: { monthly: "$15", annually: "$144" },
       description: "The essentials to provide your best work for clients.",
-      features: ["5 products", "Up to 1,000 subscribers", "Basic analytics"],
+      features: ["Phone Call"],
       mostPopular: false,
     },
     {
-      name: "Freelancer",
-      id: "tier-freelancer",
+      name: "Intermediate",
+      id: 2,
       href: "#",
       price: { monthly: "$30", annually: "$288" },
       description: "The essentials to provide your best work for clients.",
       features: [
-        "5 products",
-        "Up to 1,000 subscribers",
-        "Basic analytics",
-        "48-hour support response time",
+        "Phone Call",
+        "Email",
+        "Follow Ups",
       ],
       mostPopular: true,
     },
     {
-      name: "Startup",
-      id: "tier-startup",
+      name: "Advance",
+      id: 3,
       href: "#",
       price: { monthly: "$60", annually: "$576" },
       description: "A plan that scales with your rapidly growing business.",
       features: [
-        "25 products",
-        "Up to 10,000 subscribers",
-        "Advanced analytics",
-        "24-hour support response time",
-        "Marketing automations",
+        "Phone Call",
+        "Email",
+        "Follow Ups",
+        "Whatsapp"
       ],
       mostPopular: false,
     },
     {
-      name: "Enterprise",
-      id: "tier-enterprise",
+      name: "Free Trial",
+      id: 4,
       href: "#",
-      price: { monthly: "$90", annually: "$864" },
-      description: "Dedicated support and infrastructure for your company.",
+      price: { monthly: "$0", annually: "$0" },
+      description: "Dedicated support and this is something",
       features: [
-        "Unlimited products",
-        "Unlimited subscribers",
-        "Advanced analytics",
-        "1-hour, dedicated support response time",
-        "Marketing automations",
-        "Custom reporting tools",
+        "30 day free use Phone Call",
       ],
       mostPopular: false,
     },
@@ -72,6 +65,7 @@ function classNames(...classes) {
 
 function Plans({ onNext, onPrevious }) {
   const [frequency, setFrequency] = useState(pricing.frequencies[0]);
+  const [selectedPlan, setSelectedPlan] = useState(1);
   // const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleNext = () => {
@@ -126,29 +120,29 @@ function Plans({ onNext, onPrevious }) {
               <div
                 key={tier.id}
                 className={classNames(
-                  tier.mostPopular
-                    ? "ring-2 ring-indigo-600"
-                    : "ring-1 ring-gray-200",
-                  "rounded-3xl p-3"
+                  tier.id===selectedPlan ? "bg-gradient-to-t from-indigo-500 to to-indigo-800 text-white" : "text-gray-900",
+                  "rounded-3xl p-4 shadow-md shadow-gray-500/50 cursor-pointer",
+                  // selectedPlan && selectedPlan.id === tier.id ? "ring-2 ring-indigo-500" : ""
                 )}
+                onClick={() => setSelectedPlan(tier.id)}
               >
                 <h2
                   id={tier.id}
                   className={classNames(
-                    tier.mostPopular ? "text-indigo-600" : "text-gray-900",
+                    // tier.mostPopular ? "text-white" : "text-gray-900",
                     "text-lg font-semibold leading-8"
                   )}
                 >
                   {tier.name}
                 </h2>
-                <p className="mt-4 text-sm leading-6 text-gray-600">
+                <p className="mt-4 text-sm leading-6">
                   {tier.description}
                 </p>
                 <p className="mt-6 flex items-baseline gap-x-1">
-                  <span className="text-4xl font-bold tracking-tight text-gray-900">
+                  <span className="text-4xl font-bold tracking-tight">
                     {tier.price[frequency.value]}
                   </span>
-                  <span className="text-sm font-semibold leading-6 text-gray-600">
+                  <span className="text-sm font-semibold leading-6">
                     {frequency.priceSuffix}
                   </span>
                 </p>
@@ -156,23 +150,26 @@ function Plans({ onNext, onPrevious }) {
                   href={tier.href}
                   aria-describedby={tier.id}
                   className={classNames(
-                    tier.mostPopular
-                      ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500"
+                    tier.id===selectedPlan
+                      ? "bg-white text-indigo-600 shadow-sm"
                       : "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300",
                     "mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   )}
-                  onClick={handleNext}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNext();
+                  }}
                 >
                   Buy plan
                 </a>
                 <ul
                   role="list"
-                  className="mt-3 space-y-1 text-sm leading-6 text-gray-600"
+                  className="mt-3 space-y-1 text-sm leading-6"
                 >
                   {tier.features.map((feature) => (
-                    <li key={feature} className="flex gap-x-1">
+                    <li key={feature} className="flex gap-x-1 ">
                       <CheckIcon
-                        className="h-6 w-5 flex-none text-indigo-600"
+                        className="h-6 w-5 flex-none"
                         aria-hidden="true"
                       />
                       {feature}
