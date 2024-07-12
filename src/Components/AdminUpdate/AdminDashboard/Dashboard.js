@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 import TableContent from "./TableContent";
 import LineGraph from "./LineGraph";
 import BarGraph from "./BarGraph";
@@ -31,15 +30,6 @@ const revenueData = [
   { month: "Dec", revenue: 9000 },
 ];
 
-const userSignupsData = [
-  { month: "Jan", signups: 100 },
-  { month: "Feb", signups: 150 },
-  { month: "Mar", signups: 200 },
-  { month: "Apr", signups: 180 },
-  { month: "May", signups: 250 },
-  { month: "Jun", signups: 300 },
-];
-
 const conversionRateData = [
   { stage: "Visits", rate: 80 },
   { stage: "Quotes", rate: 60 },
@@ -47,58 +37,84 @@ const conversionRateData = [
   { stage: "Purchases", rate: 20 },
 ];
 
-
-
 const UserGraph = () => {
   const [data, setData] = useState(initialData);
-  const [filter, setFilter] = useState("all"); // Default filter
+  const [filter, setFilter] = useState("all");
+  const [view, setView] = useState("dashboard");
 
-  // Filter functions
   const filterData = (days) => {
     const today = new Date().getDay();
     const filteredData = initialData.slice(today - days + 1, today + 1);
     setData(filteredData);
-    setFilter(days.toString()); // Update filter state
+    setFilter(days.toString());
   };
-
-  // Dynamic table data
-  
 
   return (
     <div className="container mx-auto p-5 bg-white rounded-xl shadow-lg h-[90vh] overflow-y-auto overflow-hidden pr-10">
-      <h2 className="text-2xl text-black font-serif border-b text-center font-bold mb-3">
-        Dashboard
-      </h2>
-      <div className="flex justify-center space-x-4 mb-4 text-sm">
-        <button
-          className={`btn ${filter === "all" ? "btn-active" : ""}`}
-          onClick={() => setData(initialData) & setFilter("all")}
-        >
-          All
-        </button>
-        <button
-          className={`btn ${filter === "1" ? "btn-active" : ""}`}
-          onClick={() => filterData(1)}
-        >
-          Today
-        </button>
-        <button
-          className={`btn ${filter === "15" ? "btn-active" : ""}`}
-          onClick={() => filterData(15)}
-        >
-          Last 15 Days
-        </button>
-        <button
-          className={`btn ${filter === "30" ? "btn-active" : ""}`}
-          onClick={() => filterData(30)}
-        >
-          Last 30 Days
-        </button>
+      <div className="flex justify-between items-center mb-4 border-b-2 border-gray-300">
+        <h2 className="text-2xl text-black font-serif text-center font-bold mb-3">
+          Dashboard
+        </h2>
+        <div className="flex space-x-4">
+          <button
+            className={`py-2 px-4 rounded-t-lg ${
+              view === "dashboard"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
+            onClick={() => setView("dashboard")}
+          >
+            Statistics
+          </button>
+          <button
+            className={`py-2 px-4 rounded-t-lg ${
+              view === "table"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
+            onClick={() => setView("table")}
+          >
+            Call Records
+          </button>
+        </div>
       </div>
 
-      <LineGraph data={data} />
-      <BarGraph revenueData={revenueData} />
-      <PieChartGraph conversionRateData={conversionRateData} />
+      {view === "dashboard" ? (
+        <>
+          <div className="flex justify-center space-x-4 mb-4 text-sm">
+            <button
+              className={`btn ${filter === "all" ? "btn-active" : ""}`}
+              onClick={() => setData(initialData) & setFilter("all")}
+            >
+              All
+            </button>
+            <button
+              className={`btn ${filter === "1" ? "btn-active" : ""}`}
+              onClick={() => filterData(1)}
+            >
+              Today
+            </button>
+            <button
+              className={`btn ${filter === "15" ? "btn-active" : ""}`}
+              onClick={() => filterData(15)}
+            >
+              Last 15 Days
+            </button>
+            <button
+              className={`btn ${filter === "30" ? "btn-active" : ""}`}
+              onClick={() => filterData(30)}
+            >
+              Last 30 Days
+            </button>
+          </div>
+
+          <LineGraph data={data} />
+          <BarGraph revenueData={revenueData} />
+          <PieChartGraph conversionRateData={conversionRateData} />
+        </>
+      ) : (
+        <TableContent />
+      )}
     </div>
   );
 };

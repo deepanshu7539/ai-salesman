@@ -78,8 +78,9 @@ const changeNavigationState=(newState)=> {
   const [resultView, setResultView] = useState("");
   const [isChatboxOpen, setIsChatboxOpen] = useState(true);
   const [openSidebar, setOpenSidebar]=useState(true);
-
   const [showComp,setShowComp]=useState(true);
+
+
     const [notificationKey, setNotificationKey] = useState(0);
 
     const showNotification = () => {
@@ -136,7 +137,7 @@ const changeNavigationState=(newState)=> {
             throw new Error("Failed to fetch data");
           }
           setChatData(response.data);
-          setMessages([{ text: "Welcome to AI-Salesman. Let's set up your account to help you manage and optimise your sales process", sender: "system" }]);
+          setMessages([{ text: "Welcome to AI Salesman! How can I assist you today?", sender: "system" }]);
           hasFetchedData.current = true;
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -155,7 +156,7 @@ const changeNavigationState=(newState)=> {
 
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-white md:bg-white">
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
             as="div"
@@ -604,7 +605,7 @@ const changeNavigationState=(newState)=> {
                   </div>
                 </div>
                 <div>
-                  <ul className="flex justify-center items-center text-gray-600  gap-x-3  p-2 text-m font-semibold leading-6">
+                  <ul className="flex justify-center items-center text-gray-600 hover:bg-gray-50  gap-x-3  p-2 text-m font-semibold leading-6">
                     <li className="flex items-center space-x-3 hover:text-indigo-600 cursor-pointer">
                       <div className="relative">
                         <a
@@ -612,7 +613,7 @@ const changeNavigationState=(newState)=> {
                           className="cursor-pointer"
                         >
                           <svg
-                            className="w-7 h-7 text-gray-600 animate-wiggle hover:text-blue-700"
+                            className="w-7 h-7 text-gray-600 animate-wiggle"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                           >
@@ -633,12 +634,12 @@ const changeNavigationState=(newState)=> {
                           key={notificationKey}
                           message="This is a notification!"
                           type="info"
-                          duration={3000}
+                          duration={3000}  
                         />
                       </div>
                     </li>
 
-                    <li className="flex items-center space-x-2">
+                    <li className="flex items-center space-x-2 hover:text-indigo-600">
                       <a
                         href="https://zimeshare.com"
                         target="_blank"
@@ -649,7 +650,7 @@ const changeNavigationState=(newState)=> {
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
-                          className="w-6 h-6 text-gray-600 hover:text-blue-700"
+                          className="w-6 h-6 text-gray-600"
                         >
                           <path
                             strokeLinecap="round"
@@ -753,7 +754,6 @@ const changeNavigationState=(newState)=> {
                     setMessages={setMessages}
                     step={step}
                     setStep={setStep}
-                    showComp={showComp}
                   />
                 )}
               </div>
@@ -763,42 +763,18 @@ const changeNavigationState=(newState)=> {
                 }`}
               >
                 <div className="drop-shadow-lg p-4 md:p-0 rounded-xl md:pl-2 overflow-hidden ">
-                  {/* 
-          {navigationState==="Ecommerce"&&<EcomBanner />}
-          {navigationState==="Instant Quote"&&<Main chatData={chatData} callResult={callResult} renderKey={renderKey}/>} 
-        */}
+     
                   <AdminBox
                     setMessages={setMessages}
                     step={step}
                     setStep={setStep}
                   />
                 </div>
-                {/* 
-        <ChatBox
-          chatData={chatData}
-          messages={messages}
-          setMessages={setMessages}
-        /> 
-      */}
+   
               </div>
             </div>
 
-            {/* <div className="absolute bottom-0 right-0 p-4 m-2">
-              <svg
-                className="animate-bounce w-6 h-6 rounded-full"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="black"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
-                />
-              </svg>
-            </div> */}
+ 
           </main>
         </div>
       </div>
