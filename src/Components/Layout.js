@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
-import logo from "../assests/AI salesman.svg";
-import logofull from "../assests/AI-salesman-logo.svg";
+import logo from '../assests/AI salesman.svg'
+import logofull from '../assests/AI-salesman-logo.svg'
+import Notification from './Notification'
 import {
   Bars3Icon,
   BellIcon,
@@ -16,15 +17,16 @@ import {
 
 import { Fragment } from "react";
 import ChatBox from "./ChatBox";
+// import AdminBox from "./AdminBox";
 import axios from "axios";
 
 import AdminBox from "./AdminBox";
 
 const navigation = [
   { name: "Ai Salesman", href: "#", icon: UsersIcon, current: true },
-  // { name: "Ecommerce", href: "#", icon: ShoppingCartIcon, current: false },
-  
+
 ];
+
 
 const teams = [
   { name: "Engineering", href: "#", initial: "E", current: true },
@@ -37,6 +39,8 @@ const userNavigation = [
   { name: "Sign out", href: "#" },
 ];
 
+
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -47,15 +51,14 @@ export default function Layout() {
   const [activeFormComponent, setActiveFormComponent] = useState("");
   const [messages, setMessages] = useState([]);
   const hasFetchedData = useRef(false);
-  const [navigationState, setNavigationState] = useState("Instant Quote");
+const [navigationState, setNavigationState]=useState("Instant Quote");
 
-  const [step, setStep] = useState(1);
-  // const [messages, setMessages] = useState([]);
-  
+const [step,setStep]=useState(1);
+// const [messages, setMessages] = useState([]);
 
-  const changeNavigationState = (newState) => {
-    setNavigationState(newState);
-  };
+const changeNavigationState=(newState)=> {
+  setNavigationState(newState);
+}
 
   let timeoutId;
 
@@ -74,24 +77,33 @@ export default function Layout() {
   const [renderKey, setRenderKey] = useState(0);
   const [resultView, setResultView] = useState("");
   const [isChatboxOpen, setIsChatboxOpen] = useState(true);
-  const [openSidebar, setOpenSidebar] = useState(true);
+  const [openSidebar, setOpenSidebar]=useState(true);
 
-  const toggleSidebar = () => {
+  const [showComp,setShowComp]=useState(true);
+    const [notificationKey, setNotificationKey] = useState(0);
+
+    const showNotification = () => {
+      setNotificationKey((prevKey) => prevKey + 1); // Increment key to trigger re-render
+    };
+
+
+   const toggleSidebar = () => {
     //  setIsChatboxOpen(isOpen);
     setOpenSidebar(!openSidebar);
     console.log("clicked");
-  };
+
+   };
 
   const callResult = async (component) => {
     try {
       console.log("Line 77 of Layout.jsx. CALLING API NOW");
       console.log(
         "https://instantquotedemo.automationagencyindia.com/api/result/" +
-          component
+        component
       );
       const response1 = await axios.get(
         "https://instantquotedemo.automationagencyindia.com/api/result/" +
-          component
+        component
         // {
         //     component: component,
         // }
@@ -124,12 +136,7 @@ export default function Layout() {
             throw new Error("Failed to fetch data");
           }
           setChatData(response.data);
-          setMessages([
-            {
-              text: "Welcome to AI-Salesman. Let's set up your account to help you manage and optimise your sales process",
-              sender: "system",
-            },
-          ]);
+          setMessages([{ text: "Welcome to AI-Salesman. Let's set up your account to help you manage and optimise your sales process", sender: "system" }]);
           hasFetchedData.current = true;
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -137,9 +144,11 @@ export default function Layout() {
       };
 
       fetchData();
+
     }
 
-    console.log(navigationState);
+  console.log(navigationState);
+
 
     // console.log("called");
   }, [navigationState]);
@@ -598,23 +607,34 @@ export default function Layout() {
                   <ul className="flex justify-center items-center text-gray-600 hover:bg-gray-50  gap-x-3  p-2 text-m font-semibold leading-6">
                     <li className="flex items-center space-x-3 hover:text-indigo-600 cursor-pointer">
                       <div className="relative">
-                        <svg
-                          className="w-7 h-7 text-gray-600 animate-wiggle"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
+                        <a
+                          onClick={showNotification}
+                          className="cursor-pointer"
                         >
-                          <path
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeWidth="1.5"
-                            strokeLinejoin="round"
-                            d="M15.585 15.5H5.415A1.65 1.65 0 0 1 4 13a10.526 10.526 0 0 0 1.5-5.415V6.5a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1.085c0 1.907.518 3.78 1.5 5.415a1.65 1.65 0 0 1-1.415 2.5zm1.915-11c-.267-.934-.6-1.6-1-2s-1.066-.733-2-1m-10.912 3c.209-.934.512-1.6.912-2s1.096-.733 2.088-1M13 17c-.667 1-1.5 1.5-2.5 1.5S8.667 18 8 17"
-                          />
-                        </svg>
+                          <svg
+                            className="w-7 h-7 text-gray-600 animate-wiggle"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="none"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeWidth="1.5"
+                              strokeLinejoin="round"
+                              d="M15.585 15.5H5.415A1.65 1.65 0 0 1 4 13a10.526 10.526 0 0 0 1.5-5.415V6.5a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1.085c0 1.907.518 3.78 1.5 5.415a1.65 1.65 0 0 1-1.415 2.5zm1.915-11c-.267-.934-.6-1.6-1-2s-1.066-.733-2-1m-10.912 3c.209-.934.512-1.6.912-2s1.096-.733 2.088-1M13 17c-.667 1-1.5 1.5-2.5 1.5S8.667 18 8 17"
+                            />
+                          </svg>
+                        </a>
                         <div className="px-2 py-0.5 bg-red-600 rounded-full text-white text-xs absolute -top-3 -right-2">
                           3
                         </div>
+                        <Notification
+                          key={notificationKey}
+                          message="This is a notification!"
+                          type="info"
+                          duration={5000}
+                        />
                       </div>
                     </li>
 
@@ -718,8 +738,14 @@ export default function Layout() {
           </div>
 
           <main className="relative h-[90vh]">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-              <div className="rounded-b-[45px] drop-shadow-lg md:rounded-lg overflow-hidden">
+            <div
+              className={`${
+                showComp
+                  ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2"
+                  : "mx-auto max-w-xl"
+              }`}
+            >
+              <div className="rounded-b-[45px] drop-shadow-md md:rounded-lg overflow-hidden ">
                 {chatData && (
                   <ChatBox
                     chatData={chatData}
@@ -729,24 +755,53 @@ export default function Layout() {
                     setStep={setStep}
                   />
                 )}
-                
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-1">
+              <div
+                className={`${
+                  showComp ? "grid grid-cols-1 lg:grid-cols-1" : "hidden"
+                }`}
+              >
                 <div className="drop-shadow-lg p-4 md:p-0 rounded-xl md:pl-2 overflow-hidden ">
-            
+                  {/* 
+          {navigationState==="Ecommerce"&&<EcomBanner />}
+          {navigationState==="Instant Quote"&&<Main chatData={chatData} callResult={callResult} renderKey={renderKey}/>} 
+        */}
                   <AdminBox
                     setMessages={setMessages}
                     step={step}
                     setStep={setStep}
                   />
                 </div>
-  
+                {/* 
+        <ChatBox
+          chatData={chatData}
+          messages={messages}
+          setMessages={setMessages}
+        /> 
+      */}
               </div>
             </div>
 
+            {/* <div className="absolute bottom-0 right-0 p-4 m-2">
+              <svg
+                className="animate-bounce w-6 h-6 rounded-full"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="black"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
+                />
+              </svg>
+            </div> */}
           </main>
         </div>
       </div>
     </>
   );
 }
+
