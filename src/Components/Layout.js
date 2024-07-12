@@ -633,7 +633,7 @@ const changeNavigationState=(newState)=> {
                           key={notificationKey}
                           message="This is a notification!"
                           type="info"
-                          duration={5000}
+                          duration={3000}
                         />
                       </div>
                     </li>

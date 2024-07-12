@@ -8,9 +8,11 @@ import FileUpload from './AdminUpdate/FileUpload'
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import Adjust from './AdminUpdate/Adjust'
 import TableContent from "./AdminUpdate/AdminDashboard/TableContent";
+import AdminRegistration from './AdminUpdate/auth/AdminRegistration';
 
 const AdminBox = ({ setMessages, step, setStep }) => {
   const [formData, setFormData] = useState({});
+  const [login,setLogin]=useState(true);
   // const [currentStep, setCurrentStep] = useState(1);
 
   const api = "https://zimeshare.com/api/instantquotestep1";
@@ -44,6 +46,10 @@ const AdminBox = ({ setMessages, step, setStep }) => {
   const handlePrevious = () => {
     setStep(step - 1);
   };
+
+  const handleLogin=()=> {
+    setLogin(!login);
+  }
 
   useEffect(() => {
     let message = "";
@@ -95,7 +101,12 @@ const AdminBox = ({ setMessages, step, setStep }) => {
   const renderFormComponent = () => {
     switch (step) {
       case 1:
-        return <Content onNext={handleNext} />;
+        return <Plans/>
+        // if(login) {
+        //   return <AdminLogin handleLogin={handleLogin} onNext={handleNext}/>
+        // }else {
+        //   return <AdminRegistration handleLogin={handleLogin} onNext={handleNext} />
+        // }
       case 2:
         return <Plans onNext={handleNext} api={api} />;
       case 3:

@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 
-function Notification({ message, type, duration = 5000 }) {
-  const [visible, setVisible] = useState(true);
+function Notification({ message, type, duration = 3000 }) {
+  const [visible, setVisible] = useState(false); // Start with visibility set to false
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setVisible(false);
-    }, duration);
-
-    return () => clearTimeout(timer);
-  }, [duration]);
+    // Check if there's a message to show
+    if (message) {
+      setVisible(true); // Show the notification
+      const timer = setTimeout(() => {
+        setVisible(false); // Hide the notification after duration
+      }, duration);
+      return () => clearTimeout(timer); // Cleanup timer on unmount or change
+    }
+  }, [message, duration]);
 
   if (!visible) return null;
 
@@ -29,10 +32,10 @@ function Notification({ message, type, duration = 5000 }) {
 
   return (
     <div
-      className={`bg-gray-50 p-8 right-0 fixed top-12  z-50 ${shadowClasses[type]}`}
+      className={`bg-gray-50 rounded-lg py-8 pr-8 pl-6 right-0 fixed top-12 z-50 ${shadowClasses[type]}`}
     >
       <div className="flex items-center justify-between">
-        <h3 className="text-xl text-center font-bold font-serif border-b">
+        <h3 className="text-xl text-center font-bold font-serif border-b text-black">
           Notifications
         </h3>
       </div>
