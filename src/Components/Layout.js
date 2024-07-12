@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
-import logo from '../assets/AI salesman.svg'
-import logofull from '../assets/AI-salesman-logo.svg'
+import logo from '../assests/AI salesman.svg'
+import logofull from '../assests/AI-salesman-logo.svg'
+import Notification from './Notification'
 import {
   Bars3Icon,
   BellIcon,
@@ -16,29 +17,14 @@ import {
 
 import { Fragment } from "react";
 import ChatBox from "./ChatBox";
-import HomeWashBox from "./HomeWashBox";
-import ServiceScheduler from "./ServiceSchedulerBox";
 // import AdminBox from "./AdminBox";
-import Main from "./Main";
 import axios from "axios";
-import UserRegistration from "./AdminUpdate/auth/AdminRegistration";
-import AdminLogin from "./AdminUpdate/auth/AdminLogin";
-import Cart from "./Ecom/Cart";
-import Faq from "./AdminUpdate/Faq";
+
 import AdminBox from "./AdminBox";
-import Notifications from "./Notifications";
 
 const navigation = [
   { name: "Ai Salesman", href: "#", icon: UsersIcon, current: true },
-  // { name: "Ecommerce", href: "#", icon: ShoppingCartIcon, current: false },
-  // { name: "Simple Services", href: "#", icon: BellIcon, current: false },
-  // {
-  //     name: "Products",
-  //     href: "#",
-  //     icon: BellIcon,
-  //     current: false,
-  // },
-  // { name: "Complex Services", href: "#", icon: BellIcon, current: false },
+
 ];
 
 
@@ -93,7 +79,13 @@ const changeNavigationState=(newState)=> {
   const [isChatboxOpen, setIsChatboxOpen] = useState(true);
   const [openSidebar, setOpenSidebar]=useState(true);
 
-  const [showComp,setShowComp]=useState(false);
+  const [showComp,setShowComp]=useState(true);
+    const [notificationKey, setNotificationKey] = useState(0);
+
+    const showNotification = () => {
+      setNotificationKey((prevKey) => prevKey + 1); // Increment key to trigger re-render
+    };
+
 
    const toggleSidebar = () => {
     //  setIsChatboxOpen(isOpen);
@@ -615,23 +607,34 @@ const changeNavigationState=(newState)=> {
                   <ul className="flex justify-center items-center text-gray-600 hover:bg-gray-50  gap-x-3  p-2 text-m font-semibold leading-6">
                     <li className="flex items-center space-x-3 hover:text-indigo-600 cursor-pointer">
                       <div className="relative">
-                        <svg
-                          className="w-7 h-7 text-gray-600 animate-wiggle"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
+                        <a
+                          onClick={showNotification}
+                          className="cursor-pointer"
                         >
-                          <path
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeWidth="1.5"
-                            strokeLinejoin="round"
-                            d="M15.585 15.5H5.415A1.65 1.65 0 0 1 4 13a10.526 10.526 0 0 0 1.5-5.415V6.5a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1.085c0 1.907.518 3.78 1.5 5.415a1.65 1.65 0 0 1-1.415 2.5zm1.915-11c-.267-.934-.6-1.6-1-2s-1.066-.733-2-1m-10.912 3c.209-.934.512-1.6.912-2s1.096-.733 2.088-1M13 17c-.667 1-1.5 1.5-2.5 1.5S8.667 18 8 17"
-                          />
-                        </svg>
+                          <svg
+                            className="w-7 h-7 text-gray-600 animate-wiggle"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="none"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeWidth="1.5"
+                              strokeLinejoin="round"
+                              d="M15.585 15.5H5.415A1.65 1.65 0 0 1 4 13a10.526 10.526 0 0 0 1.5-5.415V6.5a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1.085c0 1.907.518 3.78 1.5 5.415a1.65 1.65 0 0 1-1.415 2.5zm1.915-11c-.267-.934-.6-1.6-1-2s-1.066-.733-2-1m-10.912 3c.209-.934.512-1.6.912-2s1.096-.733 2.088-1M13 17c-.667 1-1.5 1.5-2.5 1.5S8.667 18 8 17"
+                            />
+                          </svg>
+                        </a>
                         <div className="px-2 py-0.5 bg-red-600 rounded-full text-white text-xs absolute -top-3 -right-2">
                           3
                         </div>
+                        <Notification
+                          key={notificationKey}
+                          message="This is a notification!"
+                          type="info"
+                          duration={5000}
+                        />
                       </div>
                     </li>
 
@@ -735,7 +738,13 @@ const changeNavigationState=(newState)=> {
           </div>
 
           <main className="relative h-[90vh]">
-            <div className={`${showComp?"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2":"mx-auto max-w-xl"}`}>
+            <div
+              className={`${
+                showComp
+                  ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2"
+                  : "mx-auto max-w-xl"
+              }`}
+            >
               <div className="rounded-b-[45px] drop-shadow-md md:rounded-lg overflow-hidden ">
                 {chatData && (
                   <ChatBox
@@ -747,13 +756,21 @@ const changeNavigationState=(newState)=> {
                   />
                 )}
               </div>
-              <div className={`${showComp?"grid grid-cols-1 lg:grid-cols-1":"hidden"}`}>
+              <div
+                className={`${
+                  showComp ? "grid grid-cols-1 lg:grid-cols-1" : "hidden"
+                }`}
+              >
                 <div className="drop-shadow-lg p-4 md:p-0 rounded-xl md:pl-2 overflow-hidden ">
                   {/* 
           {navigationState==="Ecommerce"&&<EcomBanner />}
           {navigationState==="Instant Quote"&&<Main chatData={chatData} callResult={callResult} renderKey={renderKey}/>} 
         */}
-                  <AdminBox setMessages={setMessages} step={step} setStep={setStep} />
+                  <AdminBox
+                    setMessages={setMessages}
+                    step={step}
+                    setStep={setStep}
+                  />
                 </div>
                 {/* 
         <ChatBox
