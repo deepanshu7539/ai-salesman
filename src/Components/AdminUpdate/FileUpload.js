@@ -27,18 +27,17 @@ const CsvUploader = ({ onNext }) => {
     <div className="flex items-start justify-center h-[90vh] rounded-md overflow-y-auto bg-white p-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
         <h2 className="text-lg font-medium text-gray-900 mb-4">Upload CSV Files</h2>
+        <p className="text-sm text-gray-600 mb-4">
+          Please upload a CSV file containing the following fields: <strong>Name</strong>, <strong>Email</strong>, <strong>Phone</strong>, <strong>Address</strong>.
+        </p>
         <div className="mb-4">
           <label
             htmlFor="file-upload"
             className="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-6 cursor-pointer hover:bg-gray-50"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="36" height="38" fill="#4CAF50">
-  <path d="M6 3v18h12V3H6zm2 2h8v2H8V5zm0 4h8v2H8V9zm0 4h6v2H8v-2z"/>
-</svg>
-
-
-
-
+              <path d="M6 3v18h12V3H6zm2 2h8v2H8V5zm0 4h8v2H8V9zm0 4h6v2H8v-2z"/>
+            </svg>
             <span className="ml-2 text-sm text-gray-600">Click to upload</span>
             <input
               id="file-upload"
