@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const ChatBox = ({ messages, setMessages, setStep, step }) => {
+const ChatBox = ({ messages, setMessages, setStep, step, showComp }) => {
   const [input, setInput] = useState("");
   const [searchingMessage, setSearchingMessage] = useState("");
   const messagesEndRef = useRef(null);
@@ -10,9 +10,10 @@ const ChatBox = ({ messages, setMessages, setStep, step }) => {
     { command: "plans", step: 2 },
     { command: "plan", step: 2 },
     { command: "login", step: 3 },
-    { command: "information", step: 5 },
-    { command: "template", step: 7 },
-    { command: "dashboard", step: 8 },
+    { command: "information", step: 6 },
+    { command: "template", step: 8 },
+    { command: "dashboard", step: 9 },
+    { command: "payment", step: 4 },
   ];
 
   const scrollToBottom = () => {
@@ -65,7 +66,7 @@ const ChatBox = ({ messages, setMessages, setStep, step }) => {
   };
 
   return (
-    <div className="flex flex-col h-[50vh] md:h-[90vh] pb-4 bg-white rounded">
+    <div className={`flex flex-col md:h-[90vh] pb-4 bg-white rounded ${showComp ? "h-[50vh]": "h-[90vh]"}`}>
       <div className="flex-1 overflow-y-auto mb-4 custom-scrollbar">
         {messages.map((message, index) => (
           <div
