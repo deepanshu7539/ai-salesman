@@ -9,6 +9,7 @@ import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import Adjust from './AdminUpdate/Adjust'
 import TableContent from "./AdminUpdate/AdminDashboard/TableContent";
 import AdminRegistration from './AdminUpdate/auth/AdminRegistration';
+import PaymentForm from "./AdminUpdate/Payment";
 
 const AdminBox = ({ setMessages, step, setStep }) => {
   const [formData, setFormData] = useState({});
@@ -64,6 +65,9 @@ const AdminBox = ({ setMessages, step, setStep }) => {
         message = "Great! Let's start by signin you in";
         break;
       case 4:
+        message = "It's time to make a payment";
+        break;
+      case 5:
         message =
           "Business Information: What is your business name and primary contact information?\n" +
           "Could you provide a brief overview of your products or services?\n" +
@@ -74,17 +78,17 @@ const AdminBox = ({ setMessages, step, setStep }) => {
           "Communication Preferences: How do you currently communicate with your customers (e.g., email, phone calls)?\n" +
           "Do you have any preferences for the tone or style of communication?";
         break;
-      case 5:
+      case 6:
         message = "Upload the contact details of companies..";
         break;
-      case 6:
+      case 7:
         message = "Great! Let's start making call. Kindly write the template you want to use";
         break;
 
-      case 7:
+      case 8:
         message = "Call Records table and information";
         break;
-      case 8:
+      case 9:
         message = "View Complete information and Statistics with Dashboard";
         break;
       default:
@@ -101,7 +105,7 @@ const AdminBox = ({ setMessages, step, setStep }) => {
   const renderFormComponent = () => {
     switch (step) {
       case 1:
-        return <Plans/>
+        return <Content onNext={handleNext}/>
         // if(login) {
         //   return <AdminLogin handleLogin={handleLogin} onNext={handleNext}/>
         // }else {
@@ -112,14 +116,16 @@ const AdminBox = ({ setMessages, step, setStep }) => {
       case 3:
         return <AdminLogin onNext={handleNext} />;
       case 4:
-        return <AdminLogin onNext={handleNext} />;
+        return <PaymentForm onNext={handleNext} />;
       case 5:
-        return <FileUpload onNext={handleNext} />;
+        return <PaymentForm onNext={handleNext} />;
       case 6:
         return <FileUpload onNext={handleNext} />;
       case 7:
-        return <TableContent onNext={handleNext} api={api} />;
+        return <FileUpload onNext={handleNext} />;
       case 8:
+        return <TableContent onNext={handleNext} api={api} />;
+      case 9:
         return <Dashboard />;
       default:
         return null;

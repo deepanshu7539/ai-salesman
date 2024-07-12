@@ -49,8 +49,8 @@ function TableContent() {
       <h3 className="text-lg text-center font-semibold mb-4 text-gray-800 mt-2">
         Call Record and Details
       </h3>
-      <div className="bg-[#f0f0f0] rounded-lg shadow-lg p-2 h-[81vh] overflow-auto">
-        <table className="min-w-full divide-y divide-gray-300">
+      <div className=" shadow-lg p-2 h-[81vh] overflow-auto">
+        <table className="min-w-full divide-y divide-gray-300 rounded-lg">
           <thead className="bg-gray-100">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -95,15 +95,20 @@ function TableContent() {
                     {item.status}
                   </span>
                 </td>
-                <td className="px-6 py-4 overflow-x-auto space-x-2">
-                  <button className="text-blue-500 hover:text-blue-700">
-                    Follow Up
+                <td className="px-6 py-4 overflow-x-auto space-x-2 space-y-2">
+                  
+                  <button className="text-white hover:text-white text-sm flex justify-center items-center bg-green-400 p-2 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 35 20" stroke-width="1.5" stroke="currentColor" className="size-5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 3.75v4.5m0-4.5h-4.5m4.5 0-6 6m3 12c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 0 1 4.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 0 0-.38 1.21 12.035 12.035 0 0 0 7.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 0 1 1.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 0 1-2.25 2.25h-2.25Z" />
+</svg>
+
+                    Follow
                   </button>
                   <button
-                    className="text-gray-500 hover:text-gray-700"
+                    className="text-white hover:text-white text-sm flex justify-center items-center bg-blue-400 p-2 rounded-lg"
                     onClick={() => openModal(item)}
                   >
-                    View
+                    Details
                   </button>
                 </td>
               </tr>
