@@ -605,7 +605,7 @@ const changeNavigationState=(newState)=> {
                   </div>
                 </div>
                 <div>
-                  <ul className="flex justify-center items-center text-gray-600 hover:bg-gray-50  gap-x-3  p-2 text-m font-semibold leading-6">
+                  <ul className="flex justify-center items-center text-gray-600 gap-x-3  p-2 text-m font-semibold leading-6">
                     <li className="flex items-center space-x-3 hover:text-indigo-600 cursor-pointer">
                       <div className="relative">
                         <a
@@ -613,7 +613,7 @@ const changeNavigationState=(newState)=> {
                           className="cursor-pointer"
                         >
                           <svg
-                            className="w-7 h-7 text-gray-600 animate-wiggle"
+                            className="w-7 h-7 text-gray-600 animate-wiggle hover:text-blue-600"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                           >
@@ -650,7 +650,7 @@ const changeNavigationState=(newState)=> {
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
-                          className="w-6 h-6 text-gray-600"
+                          className="w-6 h-6 text-gray-600 hover:text-blue-600"
                         >
                           <path
                             strokeLinecap="round"

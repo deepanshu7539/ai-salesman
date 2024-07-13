@@ -5,6 +5,7 @@ import Dashboard from "./AdminUpdate/AdminDashboard/Dashboard";
 import Plans from "./AdminUpdate/Plans";
 import FileUpload from './AdminUpdate/FileUpload';
 import TableContent from "./AdminUpdate/AdminDashboard/TableContent";
+import AdminRegistration from "./AdminUpdate/auth/AdminRegistration";
 
 const AdminBox = ({ setMessages, step, setStep, setShowComp }) => {
   const [formData, setFormData] = useState({});
@@ -31,10 +32,10 @@ const AdminBox = ({ setMessages, step, setStep, setShowComp }) => {
         message = "Awesome! Here are the plans I offer. I suggest starting with a free trial.";
         break;
       case 3:
-        message = "Great choice! Let's get you started with your free trial. Please log in.";
+        message = "Great choice! Let's get you started with your free trial. Please Register yourself";
         break;
       case 4:
-        message = "Thank you for logging in. Let's start by quickly understanding your business needs and goals. Could you please let me know your business name?";
+        message = "Thank you for registration. Let's start by quickly understanding your business needs and goals. Could you please let me know your business name?";
         break;
         case 5:
           message = "Perfect! Let me quickly analyze your business.";
@@ -43,7 +44,7 @@ const AdminBox = ({ setMessages, step, setStep, setShowComp }) => {
           }, 500); // Delay of 1 second before moving to the next step
           break;
       case 6:
-        message = "I understand your business needs. Let's move on to the next step. Could you please provide me with your email for contact information?";
+        message = "I understand your business needs. Let's move on to the next step. Could you please provide me with your business email for contact information?";
         break;
       case 7:
         message = "Got it! To ensure I have a clear understanding, could you give me a brief overview of your products or services?";
@@ -70,7 +71,7 @@ const AdminBox = ({ setMessages, step, setStep, setShowComp }) => {
         message = "Welcome to your dashboard! Here you can view all your sales statistics.";
         break;
       case 16:
-        message = "Good idea, let's follow up this client. Do you some specific message?";
+        message = "Good idea, let's follow up with this client. Do you some specific message?";
         break;
       default:
         message = "";
@@ -93,10 +94,11 @@ const AdminBox = ({ setMessages, step, setStep, setShowComp }) => {
         return <Plans onNext={handleNext} />;
       case 3:
         setShowComp(true);
-        return <AdminLogin onNext={handleNext} />;
+        return <AdminRegistration onNext={handleNext} />;
       case 11:
         setShowComp(true);
         return <FileUpload onNext={handleNext} />;
+      case 13:
       case 14:
       case 16:
         setShowComp(true);

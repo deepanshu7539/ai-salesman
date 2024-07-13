@@ -1,11 +1,11 @@
-export default function AdminLogin({ handleLogin,onNext }) {
+export default function AdminRegistration({ handleLogin,onNext }) {
   const handleNext = () => {
     onNext();
   };
 
   return (
     <div className="px-6 bg-white rounded-xl p-4 h-[90vh]">
-      <div className="shadow-lg shadow-gray-500/50 rounded-lg translate-y-10 p-6 ease-in-out duration-300 max-w-[400px] mx-auto">
+      <div className="shadow-lg shadow-gray-500/50 rounded-lg p-6 pb-2 ease-in-out duration-300 max-w-[400px] mx-auto">
       <div className="flex justify-center mb-6">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -24,6 +24,22 @@ export default function AdminLogin({ handleLogin,onNext }) {
         </div>
       <h1 className="text-xl text-[#444444] text-center font-bold">Register</h1>
       <form className="space-y-4 md:space-y-6 max-w-lg mx-auto" action="#">
+      <div>
+          <label
+            htmlFor="name"
+            className="block mb-2 text-sm font-medium text-gray-900 "
+          >
+            Your Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 hover:scale-[1.02]"
+            placeholder="John Doe"
+            required=""
+          />
+        </div>
         <div>
           <label
             htmlFor="email"

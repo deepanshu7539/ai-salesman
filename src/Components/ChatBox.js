@@ -7,15 +7,15 @@ const ChatBox = ({ messages, setMessages, setStep, showComp }) => {
 
   const commands = [
     { command: "hello hii what you can do offer", step: 1 },
-    { command: "ok how to proceed next step steps plans plan", step: 2 },
+    { command: "ok how to proceed next step steps plans plan let's setup everything my business", step: 2 },
     { command: "authenticate login sign in register", step: 3 },
     { command: "business name is", step: 5 },
     { command: "i offer products services", step: 8 },
     { command: "targeted clients customers client customer", step: 9 },
-    { command: "pain points challenges challenge", step: 10 },
+    { command: "pain points challenges challenge less not efficient", step: 10 },
     { command: "i prefer male female warm natural bold inviting voice style", step: 11 },
     { command: "template message for sales calling preferred", step: 13 },
-    { command: "@gmail.com email my", step: 7 },
+    { command: "@gmail.com email my sure here it is ", step: 7 },
     { command: "dashboard my show want to see", step: 14 },
   ];
 
