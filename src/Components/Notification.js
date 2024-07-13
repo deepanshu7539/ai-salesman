@@ -41,7 +41,7 @@ function Notification({ message, type, duration = 3000 }) {
       </div>
 
       <div
-        className={`w-full p-3 mt-8 bg-white rounded flex ${typeClasses[type]} transition transform hover:scale-105`}
+        className={`w-full p-3 mt-8 bg-blue-100 rounded flex ${typeClasses[type]} transition transform hover:scale-105`}
       >
         <div
           tabIndex="0"
@@ -72,7 +72,7 @@ function Notification({ message, type, duration = 3000 }) {
       </div>
 
       <div
-        className={`w-full p-3 mt-4 bg-white rounded flex ${typeClasses[type]} transition transform hover:scale-105`}
+        className={`w-full p-3 mt-4 bg-blue-100 rounded flex ${typeClasses[type]} transition transform hover:scale-105`}
       >
         <div
           tabIndex="0"
@@ -105,7 +105,7 @@ function Notification({ message, type, duration = 3000 }) {
       </div>
 
       <div
-        className={`w-full p-3 mt-4 bg-white rounded flex ${typeClasses[type]} transition transform hover:scale-105`}
+        className={`w-full p-3 mt-4 bg-blue-100 rounded flex ${typeClasses[type]} transition transform hover:scale-105`}
       >
         <div
           tabIndex="0"

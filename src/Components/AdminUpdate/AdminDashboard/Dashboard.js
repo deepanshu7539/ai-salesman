@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import TableContent from "./TableContent";
 import LineGraph from "./LineGraph";
 import BarGraph from "./BarGraph";
@@ -37,7 +36,7 @@ const conversionRateData = [
   { stage: "Purchases", rate: 20 },
 ];
 
-const UserGraph = ( {setStep}) => {
+const UserGraph = ({ setStep }) => {
   const [data, setData] = useState(initialData);
   const [filter, setFilter] = useState("all");
   const [view, setView] = useState("dashboard");
@@ -51,11 +50,11 @@ const UserGraph = ( {setStep}) => {
 
   return (
     <div className="container mx-auto p-5 bg-white rounded-xl shadow-lg h-[90vh] overflow-y-auto overflow-hidden pr-10">
-      <div className="flex justify-between items-center mb-4 border-b-2 border-gray-300">
+      <div className="flex flex-col items-center mb-4 border-b-2 border-gray-300">
         <h2 className="text-2xl text-black font-serif text-center font-bold mb-3">
           Dashboard
         </h2>
-        <div className="flex space-x-4">
+        <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
           <button
             className={`py-2 px-4 rounded-t-lg ${
               view === "dashboard"
