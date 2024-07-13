@@ -1,36 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const ChatBox = ({ messages, setMessages, setStep, step, showComp }) => {
+const ChatBox = ({ messages, setMessages, setStep, showComp }) => {
   const [input, setInput] = useState("");
+  const [searchingMessage, setSearchingMessage] = useState("");
   const messagesEndRef = useRef(null);
 
-  const stepsMessages = {
-    1: "Hi! I'm your AI Salesman, here to help with your sales. Here's what I can do for you. -> [Component: Content]",
-    2: "Awesome! Here are the plans I offer. I suggest starting with a free trial.",
-    3: "Great choice! Let's get you started with your free trial. Please log in. -> [Component: Login]",
-    4: "Thank you for logging in. Let's start by quickly understanding your business needs and goals. Could you please let me know your business name?",
-    5: "Perfect! Let me quickly analyze your business.",
-    6: "I understand your business needs. Let's move on to the next step. Could you please provide me with your email for contact information?",
-    7: "Got it! To ensure I have a clear understanding, could you give me a brief overview of your products or services?",
-    8: "Who are your target customers or clients?",
-    9: "Are there specific challenges or pain points in your current sales process?",
-    10: "I see. Do you have any preferences for the tone or style of communication?",
-    11: "Thank you for the details! I now have a good understanding of your business. I will reach out to more potential customers for you. Do you already have some customer information you'd like to share?",
-    12: "Thanks! We're almost done. If you have any specific messages or information you'd like me to include when making calls, please enter them below.",
-    13: "Excellent! We’re all set. Thank you for providing all the information. Here’s your dashboard where you can see everything about your sales. -> [New Component with Tabs: Dashboard and Sales Data Table]",
-    14: "Welcome to your dashboard! Here you can view all your sales statistics.",
-    15: "This table provides information about all your customers. You can follow up with them and check their status here.",
-    16: "Do you have any specific message for the follow-up?",
-  };
-
-  const handleStepMessages = (currentStep) => {
-    if (stepsMessages[currentStep]) {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { text: stepsMessages[currentStep], sender: "system" },
-      ]);
-    }
-  };
+  const commands = [
+    { command: "hello hii what you can do offer", step: 1 },
+    { command: "ok how to proceed next step steps plans plan let's setup everything my business", step: 2 },
+    { command: "authenticate login sign in register", step: 3 },
+    { command: "business name is", step: 5 },
+    { command: "i offer products services", step: 8 },
+    { command: "targeted clients customers client customer", step: 9 },
+    { command: "pain points challenges challenge less not efficient", step: 10 },
+    { command: "i prefer male female warm natural bold inviting voice style", step: 11 },
+    { command: "template message for sales calling preferred", step: 13 },
+    { command: "@gmail.com email my sure here it is ", step: 7 },
+    { command: "dashboard my show want to see", step: 14 },
+  ];
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -38,8 +25,7 @@ const ChatBox = ({ messages, setMessages, setStep, step, showComp }) => {
 
   useEffect(() => {
     scrollToBottom();
-    handleStepMessages(step);
-  }, [step]);
+  }, [messages]);
 
   const handleSend = () => {
     if (input.trim()) {
@@ -47,74 +33,28 @@ const ChatBox = ({ messages, setMessages, setStep, step, showComp }) => {
       setMessages([...messages, newMessage]);
       setInput("");
 
-      const normalizedInput = input.trim().toLowerCase();
+      setSearchingMessage(`Searching ${input}`);
 
-      switch (step) {
-        case 1:
-          if (normalizedInput.includes("plans")) {
-            setStep(2);
-          }
-          break;
-        case 2:
-          if (normalizedInput.includes("free trial")) {
-            setStep(3);
-          }
-          break;
-        case 3:
-          // Handle user login logic
-          setStep(4);
-          break;
-        case 4:
-          // Assume user enters business name
-          setStep(5);
-          break;
-        case 5:
-          setStep(6);
-          break;
-        case 6:
-          // Assume user enters email
-          setStep(7);
-          break;
-        case 7:
-          // Assume user enters product or service info
-          setStep(8);
-          break;
-        case 8:
-          // Assume user provides target customers info
-          setStep(9);
-          break;
-        case 9:
-          // Assume user provides challenges or pain points
-          setStep(10);
-          break;
-        case 10:
-          // Assume user provides preferences for communication
-          setStep(11);
-          break;
-        case 11:
-          // Assume user uploads customer information or says no
-          setStep(12);
-          break;
-        case 12:
-          // Assume user provides message or says no
-          setStep(13);
-          break;
-        case 13:
-          setStep(14);
-          break;
-        case 14:
-          setStep(15);
-          break;
-        case 15:
-          // Assume user clicks follow-up
-          setStep(16);
-          break;
-        case 16:
-          // Assume user provides follow-up message or says no
-          setStep(1); // Reset to initial step or navigate as needed
-          break;
-        default:
-          break;
+      const normalizedInput = input.trim().toLowerCase();
+      const inputWords = normalizedInput.split(" ");
+
+      let bestMatch = null;
+      let maxMatchCount = 0;
+
+      commands.forEach((cmd) => {
+        const commandWords = cmd.command.toLowerCase().split(" ");
+        const matchCount = commandWords.reduce((count, word) => {
+          return count + (inputWords.includes(word) ? 1 : 0);
+        }, 0);
+
+        if (matchCount > maxMatchCount) {
+          maxMatchCount = matchCount;
+          bestMatch = cmd;
+        }
+      });
+
+      if (bestMatch) {
+        setStep(bestMatch.step);
       }
     }
   };
@@ -126,11 +66,7 @@ const ChatBox = ({ messages, setMessages, setStep, step, showComp }) => {
   };
 
   return (
-    <div
-      className={`flex flex-col md:h-[90vh] pb-4 bg-white rounded ${
-        showComp ? "h-[50vh]" : "h-[90vh]"
-      }`}
-    >
+    <div className={`flex flex-col md:h-[90vh] pb-4 bg-white rounded ${showComp ? "" : "h-[90vh]"}`}>
       <div className="flex-1 overflow-y-auto mb-4 custom-scrollbar">
         {messages.map((message, index) => (
           <div
