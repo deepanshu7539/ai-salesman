@@ -53,7 +53,7 @@ export default function Layout() {
   const hasFetchedData = useRef(false);
 const [navigationState, setNavigationState]=useState("Instant Quote");
 
-const [step,setStep]=useState(1);
+const [step,setStep]=useState(0);
 // const [messages, setMessages] = useState([]);
 
 const changeNavigationState=(newState)=> {
@@ -754,6 +754,7 @@ const changeNavigationState=(newState)=> {
                     setMessages={setMessages}
                     step={step}
                     setStep={setStep}
+                    showComp={showComp}
                   />
                 )}
               </div>
@@ -768,6 +769,7 @@ const changeNavigationState=(newState)=> {
                     setMessages={setMessages}
                     step={step}
                     setStep={setStep}
+                    setShowComp={setShowComp}
                   />
                 </div>
    

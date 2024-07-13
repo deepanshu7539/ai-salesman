@@ -37,7 +37,7 @@ const conversionRateData = [
   { stage: "Purchases", rate: 20 },
 ];
 
-const UserGraph = () => {
+const UserGraph = ( {setStep}) => {
   const [data, setData] = useState(initialData);
   const [filter, setFilter] = useState("all");
   const [view, setView] = useState("dashboard");
@@ -113,7 +113,7 @@ const UserGraph = () => {
           <PieChartGraph conversionRateData={conversionRateData} />
         </>
       ) : (
-        <TableContent />
+        <TableContent setStep={setStep} />
       )}
     </div>
   );
