@@ -78,7 +78,7 @@ const changeNavigationState=(newState)=> {
   const [resultView, setResultView] = useState("");
   const [isChatboxOpen, setIsChatboxOpen] = useState(true);
   const [openSidebar, setOpenSidebar]=useState(true);
-  const [showComp,setShowComp]=useState(true);
+  const [showComp,setShowComp]=useState(false);
 
 
     const [notificationKey, setNotificationKey] = useState(0);
@@ -210,13 +210,13 @@ const changeNavigationState=(newState)=> {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke="currentColor"
                           className="size-6 text-white"
                         >
                           <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             d="M6 18 18 6M6 6l12 12"
                           />
                         </svg>
@@ -306,13 +306,13 @@ const changeNavigationState=(newState)=> {
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
                               viewBox="0 0 24 24"
-                              stroke-width="1.5"
+                              strokeWidth="1.5"
                               stroke="currentColor"
                               className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
                             >
                               <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
                               />
                             </svg>
@@ -427,13 +427,13 @@ const changeNavigationState=(newState)=> {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="currentColor"
                       className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600 -ml-2"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
                       />
                     </svg>
@@ -465,13 +465,13 @@ const changeNavigationState=(newState)=> {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="size-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                 />
               </svg>
@@ -492,14 +492,14 @@ const changeNavigationState=(newState)=> {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   className="size-6 hidden lg:flex cursor-pointer"
                   onClick={toggleSidebar}
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M3.75 6.75h16.5M3.75 12H12m-8.25 5.25h16.5"
                   />
                 </svg>
@@ -760,15 +760,16 @@ const changeNavigationState=(newState)=> {
               </div>
               <div
                 className={`${
-                  showComp ? "grid grid-cols-1 lg:grid-cols-1" : "hidden"
+                  showComp ? "grid grid-cols-1 lg:grid-cols-1" : "-translate-x-6"   
                 }`}
               >
-                <div className="drop-shadow-lg p-4 md:p-0 rounded-xl md:pl-2 overflow-hidden ">
+                <div className="drop-shadow-lg p-4 md:p-0 rounded-xl md:pl-2 overflow-hidden">
      
                   <AdminBox
                     setMessages={setMessages}
                     step={step}
                     setStep={setStep}
+                    showComp={showComp}
                     setShowComp={setShowComp}
                   />
                 </div>

@@ -4,10 +4,11 @@ import Content from "./AdminUpdate/Content";
 import Dashboard from "./AdminUpdate/AdminDashboard/Dashboard";
 import Plans from "./AdminUpdate/Plans";
 import FileUpload from './AdminUpdate/FileUpload';
-import TableContent from "./AdminUpdate/AdminDashboard/TableContent";
 import AdminRegistration from "./AdminUpdate/auth/AdminRegistration";
+import PaymentForm from "./AdminUpdate/Payment";
+import Setup from "./AdminUpdate/Setup";
 
-const AdminBox = ({ setMessages, step, setStep, setShowComp }) => {
+const AdminBox = ({ setMessages, step, setStep, showComp, setShowComp }) => {
   const [formData, setFormData] = useState({});
 
   const handleNext = (data) => {
@@ -73,6 +74,9 @@ const AdminBox = ({ setMessages, step, setStep, setShowComp }) => {
       case 16:
         message = "Good idea, let's follow up with this client. Do you some specific message?";
         break;
+      case 17:
+        message="Great! Let's proceed with the payment to activate your chosen plan.";
+        break;
       default:
         message = "";
     }
@@ -95,6 +99,15 @@ const AdminBox = ({ setMessages, step, setStep, setShowComp }) => {
       case 3:
         setShowComp(true);
         return <AdminRegistration onNext={handleNext} />;
+      case 4:
+      case 5:
+      case 6:
+      case 7:
+      case 8:
+      case 9:
+      case 10:
+        setShowComp(true);
+        return <Setup setStep={setStep} />;
       case 11:
         setShowComp(true);
         return <FileUpload onNext={handleNext} />;
@@ -103,8 +116,11 @@ const AdminBox = ({ setMessages, step, setStep, setShowComp }) => {
       case 16:
         setShowComp(true);
         return <Dashboard setStep={setStep} />;
+      case 17:
+        setShowComp(true);
+        return <PaymentForm setStep={setStep} onNext={handleNext} />;
       default:
-        setShowComp(false);
+        if(showComp) setShowComp(false);
         return null;
     }
   };

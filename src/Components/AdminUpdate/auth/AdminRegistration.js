@@ -4,7 +4,7 @@ export default function AdminRegistration({ handleLogin,onNext }) {
   };
 
   return (
-    <div className="px-6 bg-white rounded-xl p-4 h-[90vh]">
+    <div className="px-6 bg-white rounded-xl p-4 h-[90vh] overflow-y-auto">
       <div className="shadow-lg shadow-gray-500/50 rounded-lg p-6 pb-2 ease-in-out duration-300 max-w-[400px] mx-auto">
       <div className="flex justify-center mb-6">
           <svg

@@ -6,7 +6,7 @@ const ChatBox = ({ messages, setMessages, setStep, showComp }) => {
   const messagesEndRef = useRef(null);
 
   const commands = [
-    { command: "hello hii what you can do offer", step: 1 },
+    { command: "hello hii hi hey what you can do offer", step: 1 },
     { command: "ok how to proceed next step steps plans plan let's setup everything my business", step: 2 },
     { command: "authenticate login sign in register", step: 3 },
     { command: "business name is", step: 5 },
@@ -17,6 +17,7 @@ const ChatBox = ({ messages, setMessages, setStep, showComp }) => {
     { command: "template message for sales calling preferred", step: 13 },
     { command: "@gmail.com email my sure here it is ", step: 7 },
     { command: "dashboard my show want to see", step: 14 },
+    { command: "payment", step: 17 },
   ];
 
   const scrollToBottom = () => {
@@ -66,7 +67,7 @@ const ChatBox = ({ messages, setMessages, setStep, showComp }) => {
   };
 
   return (
-    <div className={`flex flex-col md:h-[90vh] pb-4 bg-white rounded ${showComp ? "" : "h-[90vh]"}`}>
+    <div className={`flex flex-col  ${showComp ? "h-[50vh]" : "h-[90vh]"} md:h-[90vh] pb-4 bg-white rounded`}>
       <div className="flex-1 overflow-y-auto mb-4 custom-scrollbar">
         {messages.map((message, index) => (
           <div
