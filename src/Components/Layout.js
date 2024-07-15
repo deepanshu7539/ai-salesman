@@ -241,8 +241,8 @@ const changeNavigationState=(newState)=> {
                                   href={item.href}
                                   className={classNames(
                                     item.current
-                                      ? "bg-gray-50 text-indigo-600"
-                                      : "text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
+                                      ? "text-indigo-600"
+                                      : "text-gray-700 hover:text-indigo-600",
                                     "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                                   )}
                                 >
@@ -296,7 +296,7 @@ const changeNavigationState=(newState)=> {
                         <li className="mt-auto">
                           <a
                             href="#"
-                            className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                            className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:text-indigo-600"
                           >
                             {/* <Cog6ToothIcon
                               className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
@@ -362,8 +362,8 @@ const changeNavigationState=(newState)=> {
                           onClick={() => changeNavigationState(item.name)}
                           className={classNames(
                             item.current
-                              ? "bg-gray-50 text-indigo-600"
-                              : "text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
+                              ? "text-indigo-600"
+                              : "text-gray-700 hover:text-indigo-600",
                             "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                           )}
                         >
@@ -417,7 +417,7 @@ const changeNavigationState=(newState)=> {
                 <li className="mt-auto">
                   <a
                     href="#"
-                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:text-indigo-600"
                   >
                     {/* <InformationCircleIcon
                       className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
